@@ -1,0 +1,31 @@
+public class Vertex {
+    private String id;
+    private double weight; 
+
+    public Vertex(String id, double weight) {
+        this.id = id;
+        this.weight = weight;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    // Implement equals and hashCode based on 'id' for correct usage in a Set or Map.
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vertex vertex = (Vertex) o;
+        return id.equals(vertex.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+}
