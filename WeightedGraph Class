@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class WeightedGraph {
+    private Map<Vertex, List<Vertex>> adjVertices;
+
+    public WeightedGraph() {
+        this.adjVertices = new HashMap<>();
+    }
+
+    public void addVertex(Vertex vertex) {
+        adjVertices.putIfAbsent(vertex, new ArrayList<>());
+    }
+
+    public void addEdge(Vertex v1, Vertex v2) {
+        adjVertices.get(v1).add(v2);
+        adjVertices.get(v2).add(v1);
+    }
+
+    public List<Vertex> getAdjVertices(String id) {
+        return adjVertices.get(new Vertex(id, 0));
+    }
+}
