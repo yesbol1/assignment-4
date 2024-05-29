@@ -1,0 +1,28 @@
+public void search(Vertex start) {
+    PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparingDouble(v -> distances.get(v)));
+    Map<Vertex, Double> distances = new HashMap<>();
+    Set<Vertex> visited = new HashSet<>();
+
+    for (Vertex v : graph.adjVertices.keySet()) {
+        distances.put(v, Double.MAX_VALUE);
+    }
+    distances.put(start, start.getWeight()); // Start weight as initial cost
+    queue.add(start);
+
+    while (!queue.isEmpty()) {
+        Vertex current = queue.poll();
+        visited.add(current);
+
+        for (Vertex neighbor : graph.getAdjVertices(current.getId())) {
+            if (!visited.contains(neighbor)) {
+                double newDist = distances.get(current) + neighbor.getWeight();
+                if (newDist < distances.get(neighbor)) {
+                    distances.put(neighbor, newDist);
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
+
+    distances.forEach((vertex, distance) -> System.out.println("Vertex: " + vertex.getId() + ", Distance: " + distance));
+}
