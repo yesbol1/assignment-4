@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class BreadthFirstSearch implements Search {
+    private WeightedGraph graph;
+
+    public BreadthFirstSearch(WeightedGraph graph) {
+        this.graph = graph;
+    }
+
+    public void search(Vertex start) {
+        Queue<Vertex> queue = new LinkedList<>();
+        Set<Vertex> visited = new HashSet<>();
+        queue.add(start);
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            Vertex current = queue.poll();
+            System.out.println("Visited: " + current.getId());
+            for (Vertex v : graph.getAdjVertices(current.getId())) {
+                if (!visited.contains(v)) {
+                    visited.add(v);
+                    queue.add(v);
+                }
+            }
+        }
+    }
+}
